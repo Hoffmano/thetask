@@ -2,6 +2,7 @@ import Head from 'next/head';
 import { useState } from 'react';
 
 export default function Home() {
+  const { data, error } = useSWR('/api/hello', fetcher)
   const [items, setItems] = useState([''])
   const htmlItems = []
   const createItem = () => {
@@ -25,6 +26,9 @@ export default function Home() {
       <main>
         <h1>18/11</h1>
         {htmlItems.map((elem) => elem)}
+        {data.tasks.map(task => (
+          <p key={task.id}>task.title</p>
+        ))}
       </main>
       <style jsx global>{`
         [contenteditable="true"].single-line {
