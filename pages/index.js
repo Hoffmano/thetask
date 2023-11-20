@@ -29,7 +29,7 @@ export default function Home() {
         <h1>18/11</h1>
         {data.map(task => (<div>
           <input type='checkbox'></input>
-          <label contentEditable className="single-line" onInput={createItem} onChange={createItem}>{task.title}</label>
+          <label contentEditable className="single-line">{task.title}</label>
         </div>
         ))}
       </main>
