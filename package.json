@@ -10,7 +10,8 @@
     "@vercel/postgres": "^0.5.1",
     "next": "latest",
     "react": "18.2.0",
-    "react-dom": "18.2.0"
+    "react-dom": "18.2.0",
+    "swr": "^2.2.4"
   },
   "engines": {
     "node": ">=18"
