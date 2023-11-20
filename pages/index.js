@@ -1,19 +1,36 @@
 import Head from 'next/head';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 export default function Home() {
-  const { data } = fetch('/api/hello')
+
+  const [data, setData] = useState(null);
+
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const response = await fetch('/api/hello');
+        const jsonData = await response.json();
+        console.log(jsonData)
+        setData(jsonData);
+      } catch (error) {
+        console.error('Erro ao chamar a API:', error);
+      }
+    }
+
+    fetchData();
+  }, []);
+
   const [items, setItems] = useState([''])
   const htmlItems = []
   const createItem = () => {
     if (items.slice(-1) == '') return
     setItems(array => [...array, ''])
-  }  
+  }
   for (let item of items) {
     htmlItems.push((<>
       <div>
         <input type='checkbox'></input>
-        <label contentEditable class="single-line" onInput={createItem} onChange={createItem}>{item}</label>
+        <label contentEditable className="single-line" onInput={createItem} onChange={createItem}>{item}</label>
       </div>
     </>))
   }
@@ -25,11 +42,14 @@ export default function Home() {
       </Head>
       <main>
         <h1>18/11</h1>
-        {htmlItems.map((elem) => elem)}
-        {data.tasks.map(task => (
-          <p key={task.id}>task.title</p>
+        {data.map(task => (<div>
+          <input type='checkbox'></input>
+          <label contentEditable className="single-line" onInput={createItem} onChange={createItem}>{task.title}</label>
+        </div>
         ))}
       </main>
+
+
       <style jsx global>{`
         [contenteditable="true"].single-line {
           white-space: nowrap;
