@@ -1,10 +1,8 @@
 import Head from 'next/head';
 import { useState } from 'react';
-'use client'
-import useSWR from "swr";
 
 export default function Home() {
-  const { data } = useSWR('/api/hello', fetcher)
+  const { data } = fetch('/api/hello')
   const [items, setItems] = useState([''])
   const htmlItems = []
   const createItem = () => {
