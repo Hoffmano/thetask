@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 
 export default function Home() {
 
-  const [data, setData] = useState(null);
+  const [data, setData] = useState([]);
 
   useEffect(() => {
     async function fetchData() {
@@ -20,21 +20,6 @@ export default function Home() {
     fetchData();
   }, []);
 
-  const [items, setItems] = useState([''])
-  const htmlItems = []
-  const createItem = () => {
-    if (items.slice(-1) == '') return
-    setItems(array => [...array, ''])
-  }
-  for (let item of items) {
-    htmlItems.push((<>
-      <div>
-        <input type='checkbox'></input>
-        <label contentEditable className="single-line" onInput={createItem} onChange={createItem}>{item}</label>
-      </div>
-    </>))
-  }
-
   return (
     <div>
       <Head>
@@ -48,7 +33,6 @@ export default function Home() {
         </div>
         ))}
       </main>
-
 
       <style jsx global>{`
         [contenteditable="true"].single-line {
